@@ -1,0 +1,20 @@
+{
+    "name": "office/angularjs",
+    "autoload": {
+        "psr-4": {
+            "Office\\Angularjs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "duraipixel",
+            "email": "durairaj.pixel@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "Bytes\\": "./"
+        }
+    },
+    "require": {}
+}
