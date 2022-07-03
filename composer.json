@@ -2,8 +2,13 @@
     "name": "office/angularjs",
     "autoload": {
         "psr-4": {
-            "Office\\Angularjs\\": "src/"
-        }
+            "Office\\Angularjs\\": "src/",
+            "Bytes\\": "./"
+        },
+        "files": [
+            "./system/helper/bytes.php",
+            "./system/helper/ErrorHandler.php"
+        ]
     },
     "authors": [
         {
@@ -11,10 +16,6 @@
             "email": "durairaj.pixel@gmail.com"
         }
     ],
-    "autoload":{
-        "psr-4": {
-            "Bytes\\": "./"
-        }
-    },
+    
     "require": {}
 }
