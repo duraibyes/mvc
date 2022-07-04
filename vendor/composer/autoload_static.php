@@ -6,7 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitf8c46527eb1f36e996b85b831974516f
 {
+    public static $files = array (
+        '505a3a5e5089154ca2393b1d129362e8' => __DIR__ . '/../..' . '/system/helper/bytes.php',
+        'f8a32292b0d166d5cef043a5a1c8b6d8' => __DIR__ . '/../..' . '/system/helper/ErrorHandler.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'O' => 
+        array (
+            'Office\\Angularjs\\' => 17,
+        ),
         'B' => 
         array (
             'Bytes\\' => 6,
@@ -14,6 +23,10 @@ class ComposerStaticInitf8c46527eb1f36e996b85b831974516f
     );
 
     public static $prefixDirsPsr4 = array (
+        'Office\\Angularjs\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Bytes\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',

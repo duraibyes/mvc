@@ -1,13 +1,22 @@
 <?php
-require_once __DIR__.'../../vendor/autoload.php';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '../../vendor/autoload.php';
+
 use Bytes\system\core\Application;
+use Bytes\src\controllers\HomeController;
+
 $app = new Application();
 
-include __DIR__.'../../src/routes/path.php';
+$app->router->get('/', function () {
+    return 'Hello word';
+});
+$app->router->get('/test', [HomeController::class, 'contactForm']);
+$app->router->post('/test', [HomeController::class, 'formSubmit']);
 
-set_include_path(__DIR__.'../../src/routes');
-spl_autoload_extensions('.php');
-spl_autoload_register();
-
+$app->router->get('/users', function ($test) {
+    return 'Hello Contact' . $test;
+});
 
 $app->run();
