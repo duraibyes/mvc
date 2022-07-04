@@ -3,7 +3,7 @@
 namespace Bytes\system\request\validation;
 
 use Bytes\system\core\Request;
-use Bytes\system\interface\ValidationInterface;
+use Bytes\system\Repinterface\ValidationInterface;
 use Bytes\system\request\validation\ValidationAttributes;
 
 class ValidationMethod extends ValidationAttributes implements ValidationInterface
@@ -16,7 +16,7 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     public function required($field): string
     {
         $return  = '';
-        if (!$this->method->request($field) || empty($this->method->request($field))) {
+        if (!$this->method->request($field) || empty(array_filter($this->method->request($field)) ) ) {
             $return = 'The ' . $field . ' field is required';
         }
         return $return;
@@ -46,7 +46,7 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
         return 'test';
     }
 
-    public function exact_length($length)
+    public function exactLength($length)
     {
         return 'test';
     }
@@ -61,12 +61,12 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
         return 'maxi';
     }
 
-    public function min_length($length)
+    public function minLength($length)
     {
         return 'test';
     }
 
-    public function max_length($length)
+    public function maxLength($length)
     {
         return 'maxi';
     }
@@ -123,12 +123,32 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
         return 'string';
     }
 
-    public function maxsize($field)
+    public function maxSize($field)
     {
         return 'string';
     }
 
     public function ifHas($field)
+    {
+        return 'string';
+    }
+
+    public function adult($field)
+    {
+        return 'string';
+    }
+
+    public function date($field)
+    {
+        return 'string';
+    }
+
+    public function card($field)
+    {
+        return 'string';
+    }
+
+    public function ip($field)
     {
         return 'string';
     }

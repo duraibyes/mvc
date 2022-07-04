@@ -27,6 +27,7 @@ class HomeController extends Controller
         if (Validation::validate($validate)) {
         } else {
             $error = Validation::getErrorMsg();
+            ss($error);
         }
     }
 

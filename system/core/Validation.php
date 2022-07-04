@@ -8,7 +8,7 @@ use Exception;
 
 class Validation extends ValidationMethod
 {
-    public array $error_message;
+    public static array $error_message;
     public static function checkValidAttributes(string $attributes)
     {
         $attr = explode(',', $attributes);
@@ -30,7 +30,6 @@ class Validation extends ValidationMethod
 
                 $error = implode(',', $err);
                 trigger_error($error);
-
                 // throw new Exception("An error occurred" . $error);
             }
         } catch (Exception $e) {
@@ -51,7 +50,6 @@ class Validation extends ValidationMethod
 
         //#$rules -> will come in string as =>  required,string, min:4
         $attr = explode(',', $rules);
-
         if (isset($attr) && !empty($attr)) {
             foreach ($attr as $key => $value) {
                 $item = trim($value);
@@ -61,7 +59,8 @@ class Validation extends ValidationMethod
 
                 $error = $valid_method->$rule($field);
                 if ($error) {
-                    $this->error_message[] = $error;
+                    self::$error_message[$field] = $error;
+                    
                     break;
                 }
             }
@@ -83,13 +82,11 @@ class Validation extends ValidationMethod
                 (new Validation())->validate_request($key, $value);
             }
         }
-
         if (empty(self::$error_message)) {
             return true;
         } else {
             self::$error_message = [];
         }
-
         return true;
     }
 }

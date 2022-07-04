@@ -1,6 +1,6 @@
 <?php
 
-namespace Bytes\system\interface;
+namespace Bytes\system\Repinterface;
 
 interface ValidationInterface
 {
@@ -9,9 +9,9 @@ interface ValidationInterface
     public function validMobileNo($field): string;
     public function min($length);
     public function exact($length);
-    public function exact_length($length);
-    public function max_length($length);
-    public function min_length($length);
+    public function exactLength($length);
+    public function maxLength($length);
+    public function minLength($length);
     public function max($length);
     public function isUnique($table, $column, $id = null);
     public function string($field);
@@ -21,6 +21,10 @@ interface ValidationInterface
     public function url($field);
     public function file($field);
     public function fileType($field);
-    public function maxsize($field);
+    public function maxSize($field);
     public function ifHas($field);
+    public function adult($field);
+    public function date($field);
+    public function card($field);
+    public function ip($field);
 }

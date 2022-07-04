@@ -9,7 +9,7 @@ $app->router->get('/', function(){
 $app->router->get('/test', [HomeController::class, 'contact_form']);
 $app->router->post('/test',[HomeController::class, 'form_submit']);
 
-$app->router->get('/users', function($test){
+$app->router->get('/users', function($test) {
     return 'Hello Contact'.$test;
 });
 
