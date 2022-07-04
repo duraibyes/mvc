@@ -5,13 +5,13 @@ use Bytes\system\core\Request;
 
 class HomeController extends Controller {
 
-    public function contact_form() {
+    public function contactForm() {
         $params = [ 'title' => 'Modal add form'];
         // return Application::$app->router->render('test', $params);
         return $this->render('test', $params);
     }
 
-    public function form_submit(Request $request) {
+    public function formSubmit(Request $request) {
         
         // print_r( $_POST );
         $body = $request->post('email');
