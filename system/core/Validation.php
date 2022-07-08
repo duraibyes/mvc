@@ -2,6 +2,7 @@
 
 namespace Bytes\system\core;
 
+use Bytes\system\redirection\Po;
 use Bytes\system\request\validation\ValidationAttributes;
 use Bytes\system\request\validation\ValidationMethod;
 use Exception;
@@ -18,7 +19,7 @@ class Validation extends ValidationMethod
             foreach ($attr as $item) {
                 $item = trim($item);
                 $item = explode(':', $item);
-                $field = current($item);
+                $field = trim(current($item));
                 if (!in_array($field, ValidationAttributes::RULE_VALIDATION_ATTRIBUES)) {
                     $err[] = $field . ' Validation Rule not defined';
                 }
@@ -47,20 +48,20 @@ class Validation extends ValidationMethod
     public function validate_request($field, $rules)
     {
         $valid_method = new ValidationMethod();
-
         //#$rules -> will come in string as =>  required,string, min:4
         $attr = explode(',', $rules);
         if (isset($attr) && !empty($attr)) {
             foreach ($attr as $key => $value) {
                 $item = trim($value);
                 $item = explode(':', $item);
-                $rule = current($item);
+                $rule = trim(current($item));
+                $rule_attr = trim($item[1] ?? '');
                 $field = trim($field);
 
-                $error = $valid_method->$rule($field);
-                if ($error) {
+                $error = $valid_method->$rule($field, $rule_attr);
+                
+                if (isset($error) && !empty($error) ) {
                     self::$error_message[$field] = $error;
-                    
                     break;
                 }
             }
@@ -85,8 +86,9 @@ class Validation extends ValidationMethod
         if (empty(self::$error_message)) {
             return true;
         } else {
-            self::$error_message = [];
+            setFormError(self::getErrorMsg());
+            Po::back()->now();
         }
-        return true;
+        return false;
     }
 }

@@ -13,62 +13,75 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     {
         $this->method = new Request();
     }
-    public function required($field): string
+    public function required($field, $attr): string
     {
         $return  = '';
         if (!$this->method->request($field) || empty(array_filter($this->method->request($field)) ) ) {
-            $return = 'The ' . $field . ' field is required';
+            $return = 'The ' . camelCase($field) . ' field is required';
         }
         return $return;
     }
 
-    public function validEmail($field): string
+    public function validEmail($field, $attr): string
     {
         $return  = '';
         if (!filter_var($this->method->request($field), FILTER_VALIDATE_EMAIL)) {
-            $return = 'The ' . $field . ' field is not a valid email address';
+            $return = 'The ' . camelCase($field) . ' field is not a valid email address';
         }
         return $return;
     }
 
-    public function validMobileNo($field): string
+    public function validMobileNo($field, $attr): string
     {
         $return  = '';
         if (is_numeric($this->method->request($field)) && strlen(trim($this->method->request($field))) == 10) {
         } else {
-            return 'The ' . $field . ' field is not a valid mobile number. Should be 10 digits number';
+            return 'The ' . camelCase($field) . ' field is not a valid mobile number. Should be 10 digits number';
         }
         return $return;
     }
 
-    public function exact($length)
+    public function exact($field, $attr)
     {
         return 'test';
     }
 
-    public function exactLength($length)
+    public function exactLength($field, $attr)
     {
         return 'test';
     }
 
-    public function min($length)
+    public function lt($field, $attr)
     {
         return 'test';
     }
 
-    public function max($length)
+    public function gt($field, $attr)
     {
         return 'maxi';
     }
 
-    public function minLength($length)
+    public function minLength($field, $length): string
     {
-        return 'test';
+        $return  = '';
+        $length = (int)$length;
+        $values = $this->method->request($field);
+        
+        if ( isset( $values[$field] ) && strlen($values[$field]) < $length ) {
+            return 'The ' . camelCase($field) . ' field should have minimum '.$length.' character.';
+        }
+        return $return;
     }
 
-    public function maxLength($length)
+    public function maxLength($field, $length)
     {
-        return 'maxi';
+        $return  = '';
+        $length = (int)$length;
+        $values = $this->method->request($field);
+        if ( isset( $values[$field] ) && strlen($values[$field]) > $length ) {
+            return 'The ' . camelCase($field) . ' field should have maximum '.$length.' character.';
+        }
+        return $return;
     }
 
     public function isUnique($table, $column, $id = null)
@@ -76,79 +89,80 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
         return 'string';
     }
 
-    public function string($field)
+    public function string($field, $attr)
     {
         $return  = '';
-        if (!is_string($this->method->request($field))) {
-            return 'The ' . $field . ' field should contain string only.';
+        $values = $this->method->request($field);
+        if ( isset( $values[$field] ) && !is_string( $values[$field] ) ) {
+            return 'The ' . camelCase($field) . ' field should contain string only.';
         }
         return $return;
     }
 
-    public function numeric($field)
+    public function numeric($field, $attr)
     {
         $return  = '';
         if (!is_numeric($this->method->request($field))) {
-            return 'The ' . $field . ' field is not a valid numeric character.';
+            return 'The ' . camelCase($field) . ' field is not a valid numeric character.';
         }
         return $return;
     }
 
-    public function matchPassword($field)
+    public function matchPassword($field, $attr)
     {
         return 'string';
     }
 
-    public function alphaNum($field)
+    public function alphaNum($field, $attr)
     {
         return 'string';
     }
 
-    public function url($field)
+    public function url($field, $attr)
     {
         $return  = '';
         if (!filter_var($this->method->request($field), FILTER_VALIDATE_URL)) {
-            $return = 'The ' . $field . ' field is not a valid URL';
+            $return = 'The ' . camelCase($field) . ' field is not a valid URL';
         }
         return $return;
     }
 
-    public function file($field)
+    public function file($field, $attr)
     {
         return 'string';
     }
 
-    public function fileType($field)
+    public function fileType($field, $attr)
     {
         return 'string';
     }
 
-    public function maxSize($field)
+    public function maxSize($field, $attr)
     {
         return 'string';
     }
 
-    public function ifHas($field)
+    public function ifHas($field, $attr)
     {
         return 'string';
     }
 
-    public function adult($field)
+    public function adult($field, $attr)
     {
         return 'string';
     }
 
-    public function date($field)
+    public function date($field, $attr)
     {
         return 'string';
     }
 
-    public function card($field)
+    public function card($field, $attr)
     {
         return 'string';
     }
 
-    public function ip($field)
+    public function ip($field, $attr)
     {
         return 'string';
     }

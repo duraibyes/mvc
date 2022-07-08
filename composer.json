@@ -3,11 +3,15 @@
     "autoload": {
         "psr-4": {
             "Office\\Angularjs\\": "src/",
-            "Bytes\\": "./"
+            "Bytes\\": "./",
+            "DJBase\\": "system/"
         },
         "files": [
-            "./system/helper/bytes.php",
-            "./system/helper/ErrorHandler.php"
+            "./system/helper/Bytes.php",
+            "./system/helper/StringHelper.php",
+            "./system/helper/ErrorHandler.php",
+            "./system/helper/session.php",
+            "./system/helper/SessionFlash.php"
         ]
     },
     "authors": [
@@ -15,7 +19,7 @@
             "name": "duraipixel",
             "email": "durairaj.pixel@gmail.com"
         }
-    ],
+    ]
     
-    "require": {}
+  
 }

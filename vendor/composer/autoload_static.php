@@ -7,14 +7,21 @@ namespace Composer\Autoload;
 class ComposerStaticInitf8c46527eb1f36e996b85b831974516f
 {
     public static $files = array (
-        '505a3a5e5089154ca2393b1d129362e8' => __DIR__ . '/../..' . '/system/helper/bytes.php',
+        'c514f76497830a2ab0a4f68fb38dff91' => __DIR__ . '/../..' . '/system/helper/Bytes.php',
+        '15446dc52ede0a63a7a6fcd71cb177ce' => __DIR__ . '/../..' . '/system/helper/StringHelper.php',
         'f8a32292b0d166d5cef043a5a1c8b6d8' => __DIR__ . '/../..' . '/system/helper/ErrorHandler.php',
+        '981945aba7237a04eb5c2cba85979c1b' => __DIR__ . '/../..' . '/system/helper/session.php',
+        '40b69f1c7d78c0fcb4cbc113f3d5b1c7' => __DIR__ . '/../..' . '/system/helper/SessionFlash.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'O' => 
         array (
             'Office\\Angularjs\\' => 17,
+        ),
+        'D' => 
+        array (
+            'DJBase\\' => 7,
         ),
         'B' => 
         array (
@@ -26,6 +33,10 @@ class ComposerStaticInitf8c46527eb1f36e996b85b831974516f
         'Office\\Angularjs\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'DJBase\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/system',
         ),
         'Bytes\\' => 
         array (

@@ -1,0 +1,12 @@
+
+.dj-form-flash-error {
+    background: linear-gradient(10deg, #e33a3a, #fd7885);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.dj-form-flash-text {
+    /* color: red; */
+}

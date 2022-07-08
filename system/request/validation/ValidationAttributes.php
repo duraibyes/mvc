@@ -20,7 +20,28 @@ class ValidationAttributes
     public const RULE_FILE_MAX_SIZE = "maxsize";
     public const RULE_IF_HAS = "ifHas";
     public const RULE_VALIDATION_ATTRIBUES = array(
-        'validEmail', 'required', 'validMobileNo', 'min', 'max', 'isUnique', 'string', 'numeric', 'matchPassword',
-        'alphaNum', 'url' . 'file', 'fileType', 'maxsize', 'ifHas'
-    );
+                                                'required',
+                                                'validEmail',
+                                                'validMobileNo',
+                                                'lt',
+                                                'exact',
+                                                'exactLength',
+                                                'maxLength',
+                                                'minLength',
+                                                'gt',
+                                                'isUnique',
+                                                'string',
+                                                'numeric',
+                                                'matchPassword',
+                                                'alphaNum',
+                                                'url',
+                                                'file',
+                                                'fileType',
+                                                'maxSize',
+                                                'ifHas',
+                                                'adult',
+                                                'date',
+                                                'card',
+                                                'ip',
+                                            );
 }
