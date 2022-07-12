@@ -29,9 +29,12 @@ class HomeController extends Controller
         $validate = [
             'name' => 'required,string, minLength:4',
             'email' => 'required,validEmail',
-            'mobile_no' => 'required,validMobileNo'
+            'mobile_no' => 'required,numeric'
         ];
-        if (Validation::validate($validate)) {
+        $form_validation = Validation::validate($validate);
+       
+        if ($form_validation) {
+            // ss('Duriaj raj' );
             Po::back()->with(['test' => 'key'])->now();
         } 
     }
@@ -43,8 +46,10 @@ class HomeController extends Controller
             'email' => 'required,validEmail',
             'mobile_no' => 'required,validMobileNo'
         ];
+      
         if (Validation::validate($validate)) {
-            Po::back()->with(['test' => 'key'])->now();
+            ss( 'validated');
+            // Po::back()->with(['test' => 'key'])->now();
         } 
     }
 

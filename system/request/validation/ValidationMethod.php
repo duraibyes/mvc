@@ -25,7 +25,9 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     public function validEmail($field, $attr): string
     {
         $return  = '';
-        if (!filter_var($this->method->request($field), FILTER_VALIDATE_EMAIL)) {
+        $field_value = $this->method->request($field);
+        
+        if (!filter_var($field_value[$field], FILTER_VALIDATE_EMAIL)) {
             $return = 'The ' . camelCase($field) . ' field is not a valid email address';
         }
         return $return;
@@ -34,7 +36,8 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     public function validMobileNo($field, $attr): string
     {
         $return  = '';
-        if (is_numeric($this->method->request($field)) && strlen(trim($this->method->request($field))) == 10) {
+        $numbers = $this->method->request($field);
+        if (is_numeric($numbers[$field]) && strlen(trim($numbers[$field])) == 10) {
         } else {
             return 'The ' . camelCase($field) . ' field is not a valid mobile number. Should be 10 digits number';
         }
@@ -102,8 +105,9 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     public function numeric($field, $attr)
     {
         $return  = '';
-        if (!is_numeric($this->method->request($field))) {
-            return 'The ' . camelCase($field) . ' field is not a valid numeric character.';
+        $values = $this->method->request($field);
+        if ( isset($values[$field]) && !is_numeric($values[$field])) {
+            $return = 'The ' . camelCase($field) . ' field is not a valid numeric character.';
         }
         return $return;
     }

@@ -1,4 +1,5 @@
 <?php
+define('app_path', '../'.$_SERVER['DOCUMENT_ROOT']);
 
 //show and stop execution of program
 function ss($data = [])
@@ -8,9 +9,9 @@ function ss($data = [])
     die;
 }
 
-if (!function_exists('sayHello')) {
-    function sayHello()
+if (!function_exists('base_path')) {
+    function base_path()
     {
-        return 'Hello!';
+        return getenv('BASE_URL');
     }
 }

@@ -9,6 +9,7 @@ class Request
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI'] ?? false;
+        
         $position = strpos($path, '?');
 
         if ($position === false) {
@@ -55,7 +56,7 @@ class Request
     public function request($field)
     {
         $method = $this->getMethod();
-        return $this->$method($field);
+        return $this->$method(trim($field));
     }
 
     public function validate($rules)

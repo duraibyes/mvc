@@ -9,7 +9,7 @@ use Exception;
 
 class Validation extends ValidationMethod
 {
-    public static array $error_message;
+    public static array $error_message = [];
     public static function checkValidAttributes(string $attributes)
     {
         $attr = explode(',', $attributes);
@@ -38,6 +38,7 @@ class Validation extends ValidationMethod
             die;
         }
         return $err;
+        
     }
 
     public static function getErrorMsg()
@@ -50,8 +51,11 @@ class Validation extends ValidationMethod
         $valid_method = new ValidationMethod();
         //#$rules -> will come in string as =>  required,string, min:4
         $attr = explode(',', $rules);
+        $no_error = true;
+        
         if (isset($attr) && !empty($attr)) {
             foreach ($attr as $key => $value) {
+
                 $item = trim($value);
                 $item = explode(':', $item);
                 $rule = trim(current($item));
@@ -62,8 +66,12 @@ class Validation extends ValidationMethod
                 
                 if (isset($error) && !empty($error) ) {
                     self::$error_message[$field] = $error;
+                    $no_error = false;
                     break;
-                }
+                } 
+            }
+            if( $no_error ) {
+                unsetFormError($field);
             }
         }
     }
@@ -75,7 +83,6 @@ class Validation extends ValidationMethod
                 self::checkValidAttributes($value);
             }
         }
-
         if (isset($rules) && !empty($rules)) {
             foreach ($rules as $key => $value) {
                 $key = trim($key);
@@ -83,10 +90,11 @@ class Validation extends ValidationMethod
                 (new Validation())->validate_request($key, $value);
             }
         }
-        if (empty(self::$error_message)) {
+        setFormError(self::getErrorMsg());
+        if (empty( array_filter(self::$error_message))) {
+            unsetFormError();
             return true;
         } else {
-            setFormError(self::getErrorMsg());
             Po::back()->now();
         }
         return false;

@@ -30,7 +30,22 @@ if (! function_exists('flash')) {
  */
 if (! function_exists('setFormError')) {
     function setFormError(array $formArray ) {
-        $_SESSION[ 'formflash' ] = $formArray;
+        $_SESSION[ 'formflash' ]['errors'] = $formArray;
+        $_SESSION[ 'formflash' ]['values'] = $_REQUEST ?? [];
+    }
+}
+/**
+ *  set Form error messages on form flash
+ * setFormError(['name' => 'name field is required', 'email' => 'email fiedl is  required'])
+ */
+if (! function_exists('unsetFormError')) {
+    function unsetFormError( string $field = null) {
+        if( $field ) {
+            unset($_SESSION[ 'formflash' ]['errors'][$field]);
+        } else {
+            unset($_SESSION[ 'formflash' ]['errors']);
+        }
+        
     }
 }
 /**
@@ -42,7 +57,7 @@ if (! function_exists('setFormError')) {
  */
 if (! function_exists('formError')) {
     function formError(string $field = null ) {
-        $errors = $_SESSION[ 'formflash' ] ?? '';
+        $errors = $_SESSION[ 'formflash' ]['errors'] ?? '';
         if( isset( $errors ) && !empty($errors) ){
             if( !$field ) {
                 return $errors;
@@ -59,7 +74,7 @@ if (! function_exists('formError')) {
  */
 if (! function_exists('formErrorAlert')) {
     function formErrorAlert(string $field = null ) {
-        $errors = $_SESSION[ 'formflash' ] ?? '';
+        $errors = $_SESSION[ 'formflash' ]['errors'] ?? '';
         $error_html = '';
         if( isset( $errors ) && !empty($errors) ){
             $error_html = '<div class="dj-form-flash-error">';
@@ -74,5 +89,15 @@ if (! function_exists('formErrorAlert')) {
             unset($_SESSION[ 'formflash' ]);
         }
         echo $error_html;
+    }
+}
+/**
+ *  set Form error messages on form flash
+ * setFormError(['name' => 'name field is required', 'email' => 'email fiedl is  required'])
+ */
+if (! function_exists('dVal')) {
+    function dVal(string $field ) {
+        $values = $_SESSION[ 'formflash' ]['values'] ?? '';
+        return $values[$field] ?? '';
     }
 }

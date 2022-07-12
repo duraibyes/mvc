@@ -8,7 +8,7 @@ class Response {
 
     public function responseView($code) {
         \ob_start();
-        include_once __DIR__."/../response/view/$code.php";
+        include_once __DIR__."/../response/view/error.php";
         return \ob_get_clean();
     }
 }
