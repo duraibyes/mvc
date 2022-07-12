@@ -6,20 +6,22 @@
         <title>Bootstrap demo</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- <link href="<?= asset_path() ?>assets/css/main.css" rel="stylesheet"> -->
+        <link href="<?= asset_path('css/main.css') ?>" rel="stylesheet">
     </head>
     <body>
         <h1></h1>
         <div class="container">
-            <div class="card card-body">
+            <div class="card card-body main">
                 <h2 id="card-title"></h2>
                 <?php 
                 echo '<pre>';
                 print_r( $_SESSION[ 'formflash' ]['values'] ?? '' );
                 echo '</pre>'
                 ?>
-                <form method="POST" action="/form/submit" class="dj-form-validate">
+                <form method="POST" action="/form/submit" class="dj-form-validate" enctype="multipart/form-data">
                     <?= $title ?>
-                    <div class="mb-3">
+                    <div class="mb-3 main">
                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
                         <input type="text" name="email" class="form-control" id="exampleFormControlInput1"
                             placeholder="name@example.com" value="<?= dVal('email') ?>">
@@ -35,6 +37,10 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Url</label>
                         <input type="text" name="url" class="form-control" value="<?= dVal('url') ?>" id="exampleFormControlInput1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" name="image" class="form-control" id="image">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>

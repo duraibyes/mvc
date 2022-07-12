@@ -3,6 +3,7 @@
 namespace Bytes\system\core;
 
 use Bytes\system\core\Validation;
+use Bytes\system\core\Files;
 
 class Request
 {
@@ -38,6 +39,11 @@ class Request
         return $body;
     }
 
+    public function input($field) {
+        $value = $this->request($field);
+        return $value[$field] ?? null;
+    }
+
     public function post($field = '')
     {
         $body = [];
@@ -68,5 +74,9 @@ class Request
                 $validation->checkValidAttributes($value);
             }
         }
+    }
+
+    public function file($field, $path) {
+        ss( Files::upload($field, $path) );
     }
 }

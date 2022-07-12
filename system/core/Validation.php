@@ -49,6 +49,7 @@ class Validation extends ValidationMethod
     public function validate_request($field, $rules)
     {
         $valid_method = new ValidationMethod();
+        
         //#$rules -> will come in string as =>  required,string, min:4
         $attr = explode(',', $rules);
         $no_error = true;
@@ -84,6 +85,7 @@ class Validation extends ValidationMethod
             }
         }
         if (isset($rules) && !empty($rules)) {
+            
             foreach ($rules as $key => $value) {
                 $key = trim($key);
                 $value = trim($value);

@@ -15,8 +15,6 @@ $env = new Env(__DIR__ . '../../.env');
 $env->load();
 
 // ss( base_path());
-
-
 $app = new Application();
 
 require_once __DIR__.'../../src/routes/path.php';

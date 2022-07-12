@@ -25,16 +25,21 @@ class HomeController extends Controller
 
     public function formSubmit(Request $request)
     {
-        
         $validate = [
             'name' => 'required,string, minLength:4',
             'email' => 'required,validEmail',
-            'mobile_no' => 'required,numeric'
+            'mobile_no' => 'required,numeric',
+            'image' => 'required, fileType:jpg|jpeg|png, maxSize:10000',
         ];
         $form_validation = Validation::validate($validate);
        
         if ($form_validation) {
-            // ss('Duriaj raj' );
+            $ins['name'] = $request->input('name');
+            $ins['email'] = $request->input('email');
+            $ins['mobile_no'] = $request->input('mobile_no');
+            $ins['url'] = $request->input('url');
+            $ins['image'] = $request->file('image', 'storage/test');
+            ss(  );
             Po::back()->with(['test' => 'key'])->now();
         } 
     }

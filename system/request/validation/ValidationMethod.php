@@ -3,6 +3,7 @@
 namespace Bytes\system\request\validation;
 
 use Bytes\system\core\Request;
+use Bytes\system\core\Files;
 use Bytes\system\Repinterface\ValidationInterface;
 use Bytes\system\request\validation\ValidationAttributes;
 
@@ -17,7 +18,12 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
     {
         $return  = '';
         if (!$this->method->request($field) || empty(array_filter($this->method->request($field)) ) ) {
-            $return = 'The ' . camelCase($field) . ' field is required';
+           
+            if( isset($_FILES[$field]['name'] ) && !empty( $_FILES[$field]['name'] ) ) {
+            } else {
+                $return = 'The ' . camelCase($field) . ' field is required';
+            }
+
         }
         return $return;
     }
@@ -138,12 +144,13 @@ class ValidationMethod extends ValidationAttributes implements ValidationInterfa
 
     public function fileType($field, $attr)
     {
-        return 'string';
+        $extensions = explode("|", $attr);
+        return Files::checkType($field, $extensions);
     }
 
     public function maxSize($field, $attr)
     {
-        return 'string';
+        return Files::checkSize($field, $attr);
     }
 
     public function ifHas($field, $attr)
