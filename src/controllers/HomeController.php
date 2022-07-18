@@ -38,8 +38,8 @@ class HomeController extends Controller
             $ins['email'] = $request->input('email');
             $ins['mobile_no'] = $request->input('mobile_no');
             $ins['url'] = $request->input('url');
-            $ins['image'] = $request->file('image', 'storage/test');
-            ss(  );
+            $ins['image'] = $request->save('test')->file('image');
+            ss( $ins );
             Po::back()->with(['test' => 'key'])->now();
         } 
     }

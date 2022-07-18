@@ -28,7 +28,7 @@ class Files {
     }
 
     public static function upload($field, $path) {
-        $errors = '';
+        $file_info = [];
         if( isset( $_FILES[$field]['name'] ) && !empty(  $_FILES[$field]['name'] ) ) {
             $ext = explode('.',$_FILES[$field]['name']);
             $file_ext = strtolower(end($ext));
@@ -38,15 +38,17 @@ class Files {
             $uploaddir = realpath('./') . '/';
             $uploadfile = $uploaddir.'bootstrap/storage/' . basename($file_name);
 
-            echo "<br><br>";
-            print_r ($uploadfile);
-            echo "<br><br>";
-            if(move_uploaded_file($file_tmp, $uploadfile) ) {
-                $errors = "Success";
-            } else {
-                $errors = 'error';
+            try {
+                move_uploaded_file($file_tmp, $uploadfile);
+                $file_info = array('file_name' => $file_name, 'file_saved_path' => $uploadfile );
             }
+            catch(\Exception $e) {
+                trigger_error('Message: ' .$e->getMessage());
+            }
+           
+        } else {
+            trigger_error('File not found, check with file name or form encryption ', E_USER_ERROR);
         }
-        return $errors;
+        return $file_info;
     }
 }

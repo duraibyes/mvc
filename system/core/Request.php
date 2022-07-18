@@ -7,6 +7,7 @@ use Bytes\system\core\Files;
 
 class Request
 {
+    protected $file_save_path;
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI'] ?? false;
@@ -76,7 +77,23 @@ class Request
         }
     }
 
-    public function file($field, $path) {
+    public function file($field) {
+        $path = $this->file_save_path;
+        if( !$path ) {
+            trigger_error('File path not defined. Use save function with file to set file path.', E_USER_ERROR);
+        }
         ss( Files::upload($field, $path) );
+    }
+    public function save($path) {
+        $uploaddir = realpath('./') . '/';
+        $uploadfile = $uploaddir.'bootstrap/storage/'.$path;
+        if (!file_exists($uploadfile)) {
+            
+            mkdir($uploadfile, 0777, true);
+            echo 'created';
+        }
+        ss( 'test');
+        $this->file_save_path = $path;
+        return $this;
     }
 }
