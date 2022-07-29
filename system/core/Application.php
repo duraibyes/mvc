@@ -11,12 +11,16 @@ class Application
     public Request $request;
     public Response $response;
     public static Application $app;
+
+    public Database $db;
     public function __construct()
     {
         self::$app = $this;
+        $this->db = new Database();
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
+        
     }
 
     public function run()

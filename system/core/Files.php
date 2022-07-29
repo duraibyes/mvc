@@ -36,7 +36,8 @@ class Files {
 
             $file_tmp = $_FILES[$field]['tmp_name'];
             $uploaddir = realpath('./') . '/';
-            $uploadfile = $uploaddir.'bootstrap/storage/' . basename($file_name);
+            // $uploadfile = $uploaddir.'bootstrap/storage/' . basename($file_name);
+            $uploadfile = $path.'/'. basename($file_name);
 
             try {
                 move_uploaded_file($file_tmp, $uploadfile);

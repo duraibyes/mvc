@@ -2,6 +2,7 @@
 
 namespace Bytes\src\controllers;
 
+use Bytes\src\models\User;
 use Bytes\system\core\Controller;
 use Bytes\system\core\Request;
 use Bytes\system\core\Validation;
@@ -12,6 +13,9 @@ class HomeController extends Controller
     public function index()
     {
         $params = ['title' => 'Modal add form'];
+        // $info = $this->all();
+        $info = User::where()->get();
+        ss( $info );
         // return Application::$app->router->render('test', $params);
         return $this->render('home', $params);
     }
@@ -38,8 +42,9 @@ class HomeController extends Controller
             $ins['email'] = $request->input('email');
             $ins['mobile_no'] = $request->input('mobile_no');
             $ins['url'] = $request->input('url');
-            $ins['image'] = $request->save('test')->file('image');
+            $ins['image'] = $request->returnPath()->save('users')->file('image');
             ss( $ins );
+            //database connection start for insert update options
             Po::back()->with(['test' => 'key'])->now();
         } 
     }

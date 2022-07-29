@@ -8,6 +8,7 @@ use Bytes\system\core\Files;
 class Request
 {
     protected $file_save_path;
+    protected $file_return_path;
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI'] ?? false;
@@ -76,24 +77,48 @@ class Request
             }
         }
     }
-
+    /***
+     * file function used to upload file with specific path 
+     * Return values : array 
+     * array(2) {
+                        ["file_name"]=>
+                        string(30) "3139323078313132302e706e67.png"
+                        ["file_saved_path"]=>
+                        string(92) "E:\xampp7.4.29\htdocs\duraibytes/bootstrap/storage/users/3139323078313132302e706e67.png"
+                        }
+     * we return only file name if you want to file_saved_path 
+     */
     public function file($field) {
+
         $path = $this->file_save_path;
         if( !$path ) {
             trigger_error('File path not defined. Use save function with file to set file path.', E_USER_ERROR);
         }
-        ss( Files::upload($field, $path) );
+        $img_return = Files::upload($field, $path);
+        if( $this->file_return_path == 'path' ) {
+            return $img_return['file_saved_path'];
+        }  else {
+            return $img_return['file_name'];
+        }
+
+    }
+    public function returnPath() {
+        $this->file_return_path = 'path';
+        return $this;
+    }
+    public function returnName() {
+        $this->file_return_path = 'name';
+        return $this;
     }
     public function save($path) {
         $uploaddir = realpath('./') . '/';
         $uploadfile = $uploaddir.'bootstrap/storage/'.$path;
         if (!file_exists($uploadfile)) {
-            
             mkdir($uploadfile, 0777, true);
-            echo 'created';
+            // echo 'created';
         }
-        ss( 'test');
-        $this->file_save_path = $path;
+        
+        $this->file_save_path = $uploadfile;
         return $this;
     }
 }

@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-echo getenv('BASE_URL');
 echo '<style>';
 include ( __DIR__.'../../bootstrap/app/core/base/css/base.form.css');
 echo '</style>';
