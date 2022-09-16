@@ -11,19 +11,25 @@
     </head>
     <body>
       this is home page
+      <?php 
+                // echo '<pre>';
+                // print_r( $_SESSION );
+                // print_r( $_SESSION[ 'formflash' ]['values'] ?? '' );
+                // echo '</pre>'
+                ?>
       <form method="POST" action="/contact/submit">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email address</label>
             <input type="text" name="email" class="form-control" id="exampleFormControlInput1"
-                placeholder="name@example.com">
+                placeholder="name@example.com" value="<?= past('email') ?>">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="name">
+            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" value="<?= past('name') ?>" placeholder="name">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Mobile no</label>
-            <input type="text" name="mobile_no" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <input type="text" name="mobile_no" class="form-control" value="<?= past('mobile_no') ?>" id="exampleFormControlInput1" placeholder="">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Url</label>
@@ -31,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"><?= past('description') ?></textarea>
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Submit</button>

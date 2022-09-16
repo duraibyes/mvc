@@ -6,6 +6,7 @@ use Bytes\src\models\User;
 use Bytes\system\core\Controller;
 use Bytes\system\core\Request;
 use Bytes\system\core\Validation;
+use Bytes\system\database\Eloquent\Orm\BuildOrm;
 use Bytes\system\redirection\Po;
 
 class HomeController extends Controller
@@ -14,8 +15,9 @@ class HomeController extends Controller
     {
         $params = ['title' => 'Modal add form'];
         // $info = $this->all();
-        $info = User::where()->get();
-        ss( $info );
+        // $info = BuildOrm::table('users')->find();
+        $info = User::find();
+        // ss( $info );
         // return Application::$app->router->render('test', $params);
         return $this->render('home', $params);
     }

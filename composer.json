@@ -11,7 +11,8 @@
             "./system/helper/StringHelper.php",
             "./system/helper/ErrorHandler.php",
             "./system/helper/session.php",
-            "./system/helper/SessionFlash.php"
+            "./system/helper/SessionFlash.php",
+            "./system/helper/Form.php"
         ]
     },
     "authors": [

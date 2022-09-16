@@ -6,5 +6,6 @@ use Bytes\system\core\Application;
 use Bytes\system\database\Model;
 
 class User extends Model {
+    protected $table = 'users';
     
 }

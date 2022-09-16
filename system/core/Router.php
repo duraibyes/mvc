@@ -22,9 +22,9 @@ class Router {
         
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-   
-        // ss( $this->routes );
+        $_SESSION['old'] = $_REQUEST;
         $callback = $this->routes[$method][$path] ?? false;
+        
         if( $callback === false) {
             $this->response->setStatusCode(404);
             return $this->response->responseView(404);

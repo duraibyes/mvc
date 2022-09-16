@@ -3,9 +3,11 @@ namespace Bytes\system\database;
 
 use Bytes\src\models\User;
 use Bytes\system\core\Application;
+use Bytes\system\database\Eloquent\Orm\BuildOrm;
 use PDO;
 
-abstract class Model {
+class Model extends BuildOrm {
+    
     public static function all() {
 
         $db = Application::$app->db;

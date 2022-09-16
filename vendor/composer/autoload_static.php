@@ -12,6 +12,7 @@ class ComposerStaticInitf8c46527eb1f36e996b85b831974516f
         'f8a32292b0d166d5cef043a5a1c8b6d8' => __DIR__ . '/../..' . '/system/helper/ErrorHandler.php',
         '981945aba7237a04eb5c2cba85979c1b' => __DIR__ . '/../..' . '/system/helper/session.php',
         '40b69f1c7d78c0fcb4cbc113f3d5b1c7' => __DIR__ . '/../..' . '/system/helper/SessionFlash.php',
+        'c4e676eb425e504872e4e62549ced8fa' => __DIR__ . '/../..' . '/system/helper/Form.php',
     );
 
     public static $prefixLengthsPsr4 = array (

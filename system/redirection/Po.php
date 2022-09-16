@@ -7,7 +7,7 @@ class Po {
     public static $withValue;
     public static $redirectUrl;
 
-    public function back() {
+    public static function back() {
         static::$redirectUrl = $_SERVER['HTTP_REFERER'];
         return new static;
     }
@@ -29,8 +29,6 @@ class Po {
         $with_input = static::$withValue;
         $path = static::$redirectUrl;
         if( isset( $with_input ) && !empty($with_input)) {
-
-           
             $_SESSION['flash_form_message'] = $with_input;
         }
         header("Location:$path");
